@@ -1,0 +1,23 @@
+[project]
+name = "headhunter_agents_ux"
+version = "0.1.0"
+description = "headhunter_agents_UX using crewAI"
+authors = [{ name = "Donaven Lobo", email = "donaven10@gmail.com" }]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "crewai[tools]>=0.105.0,<1.0.0"
+]
+
+[project.scripts]
+headhunter_agents_ux = "headhunter_agents_ux.main:run"
+run_crew = "headhunter_agents_ux.main:run"
+train = "headhunter_agents_ux.main:train"
+replay = "headhunter_agents_ux.main:replay"
+test = "headhunter_agents_ux.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"

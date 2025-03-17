@@ -1,0 +1,11 @@
+crewai
+crewai_tools
+matplotlib
+numpy
+pandas
+requests
+selenium
+beautifulsoup4
+openai
+langchain
+langchain_community
