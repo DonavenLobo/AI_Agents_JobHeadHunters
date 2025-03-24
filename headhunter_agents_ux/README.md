@@ -1,24 +1,33 @@
-# HeadhunterAgentsUx Crew
+# HeadhunterAgents UX
 
-Welcome to the HeadhunterAgentsUx Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+Welcome to the HeadhunterAgents UX project, powered by [crewAI](https://crewai.com). This project creates an AI-powered system to assist headhunters and recruiters in their daily tasks, leveraging multiple collaborative AI agents.
 
 ## Installation
 
-Ensure you have Python >=3.10 <3.13 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
+Ensure you have Python >=3.10 <3.13 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling.
 
-First, if you haven't already, install uv:
-
+1. Install UV:
 ```bash
 pip install uv
 ```
 
-Next, navigate to your project directory and install the dependencies:
+2. Clone this repository and navigate to the project directory
 
-(Optional) Lock the dependencies and install them by using the CLI command:
+3. Install dependencies:
+```bash
+uv venv
+uv pip install -r requirements.txt
+```
+
+Alternatively, use the CLI command:
 ```bash
 crewai install
 ```
-### Customizing
+
+### Configuration
+
+1. Create a `.env` file in the root directory
+2. Add your `OPENAI_API_KEY` to the `.env` file:
 
 **Add your `OPENAI_API_KEY` into the `.env` file**
 

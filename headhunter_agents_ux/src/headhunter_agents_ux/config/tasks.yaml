@@ -1,17 +1,56 @@
-research_task:
+job_listing_discovery_task:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is {current_year}.
+    The Job Scout agent will scour multiple online sources—including job boards, company career pages, and professional networks—for UX-related job listings. The agent must ensure that each listing is recently posted (ideally within the last 15 days) and is relevant to the candidate's background and experience. All gathered data should be compiled into an Excel file ("jobs.csv") with clearly defined columns: Job Title, Company Name, Listing Date, Relevance Score (e.g., 1-10 based on alignment with the candidate’s profile), and Source URL. The agent must check for duplicates and only append new listings without removing existing entries.
   expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
+    Update an Excel file named "jobs.csv" containing a curated list of job listings. Each entry must include:
+      - Job Title
+      - Company Name
+      - Listing Date (if available)
+      - Relevance Score indicating fit with the candidate’s experience
+      - Source URL or reference note
+    Additionally, include brief notes on why each listing is considered a good match.
+  agent: job_scout
 
-reporting_task:
+job_analysis_strategy_task:
   description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    Using the Excel file generated in the previous task, the Job Verifier agent will review each job listing in detail. This task involves:
+      - Validating the credibility and recency of each listing by cross-referencing with official company websites and trusted job portals.
+      - Conducting in-depth background research on the companies and specific UX roles, including information on company culture, industry reputation, recent news, and role-specific requirements.
+      - Developing a strategic plan that outlines key factors and actionable recommendations for maximizing the candidate’s chances of success.
   expected_output: >
-    A fully fledged report with the main topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+    A comprehensive strategic report (formatted as a Markdown or Excel document) that includes for each job listing:
+      - A validation status and notes confirming recency and authenticity.
+      - Detailed background insights on the company and role.
+      - A prioritized list of recommendations and action items for tailoring the resume (e.g., key skills to highlight, suggested keywords, or additional information that may strengthen the application).
+  agent: job_verifier
+  context: "Output of job_listing_discovery_task (jobs.csv)"
+
+resume_optimization_task:
+  description: >
+    The Resume Tailor agent will take the strategic recommendations from the previous task and analyze the candidate’s current resume. This task focuses on optimizing the resume for Applicant Tracking Systems (ATS) without altering the core content. The agent should:
+      - Extract and integrate relevant keywords and phrases from the strategic report.
+      - Reorder and rephrase sections where necessary to enhance keyword density.
+      - Preserve the candidate’s original achievements and experiences while boosting alignment with the job requirements.
+  expected_output: >
+    An updated resume file (in .md format) that clearly reflects:
+      - Integrated industry-specific keywords and phrases.
+      - Strategic modifications based on the background research and recommendations.
+      - A summary of changes made, including a list of added keywords and highlights that directly address the job listings.
+  agent: resume_tailor
+  context: "Output of job_analysis_strategy_task (Strategic Report)"
+
+cover_letter_generation_task:
+  description: >
+    The Cover Letter Artisan agent will create a succinct, targeted cover letter that addresses any points from the job descriptions not covered in the optimized resume. The cover letter should:
+      - Be personalized to each job listing using insights from the strategic report.
+      - Include a compelling introduction, key points that complement the resume, and a strong closing call-to-action.
+      - Clearly articulate the candidate’s unique value proposition and align with both the candidate’s background and the specific requirements of the job listing.
+  expected_output: >
+    A set of tailored cover letters (either as individual text files or as sections within a consolidated document) where each cover letter includes:
+      - A personalized greeting and introduction.
+      - A clear statement of interest and connection to the company and role.
+      - Targeted content addressing any gaps not highlighted in the resume.
+      - A professional closing with a call-to-action encouraging the next steps.
+  agent: cover_letter_artisan
+  context: >
+    "Utilize the optimized resume from resume_optimization_task and strategic insights from job_analysis_strategy_task to tailor each cover letter."
